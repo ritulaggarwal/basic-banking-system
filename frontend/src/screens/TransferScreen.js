@@ -1,8 +1,19 @@
-import React from 'react'
+import React, {useState,useEffect} from 'react'
 import {Row } from 'react-bootstrap'
-import customers from '../customers'
+import axios from 'axios'
 
 const TransferScreen = () => {
+    const [customers,setCustomers]=useState([])
+
+    useEffect(()=>{
+        const fetchCustomers=async ()=>{
+            const {data}=await axios.get('/api/customers')
+            setCustomers(data)
+        }
+        fetchCustomers()
+    },[])
+
+
     return (
         <>
             <h1>Transfer Money</h1>

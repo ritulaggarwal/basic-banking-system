@@ -1,9 +1,19 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import { Table} from 'react-bootstrap'
-import customers from '../customers'
+import axios from 'axios'
 
 const AllCustomerScreen = () => {
+    const [customers,setCustomers]=useState([])
+
+    useEffect(()=>{
+        const fetchCustomers=async ()=>{
+            const {data}=await axios.get('/api/customers')
+            setCustomers(data)
+        }
+        fetchCustomers()
+    },[])
+
     return (
         <>
             <h1>All customers</h1>

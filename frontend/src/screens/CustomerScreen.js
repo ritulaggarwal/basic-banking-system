@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Card, ListGroup,Button } from 'react-bootstrap'
-import customers from '../customers'
+import { Card, ListGroup, Button } from 'react-bootstrap'
+import axios from 'axios'
 
 const CustomerScreen = ({ match }) => {
-    const customer = customers.find((c) => c._id === match.params.id)
+    const [customer, setCustomer] = useState([])
+
+    useEffect(() => {
+        const fetchCustomer = async () => {
+            const { data } = await axios.get(`/api/customers/${match.params.id}`)
+            setCustomer(data)
+        }
+        fetchCustomer()
+    }, [match])
+
     return (
         <>
             <div className="customer-holder">
@@ -16,11 +25,11 @@ const CustomerScreen = ({ match }) => {
                     </ListGroup>
                 </Card>
             </div>
-            <div className="customer-holder my-4"> 
+            <div className="customer-holder my-4">
                 <LinkContainer to='/transfer'>
-                <Button variant="info">Transfer Money</Button>
+                    <Button variant="info">Transfer Money</Button>
                 </LinkContainer>
-            
+
             </div>
 
         </>
