@@ -61,4 +61,4 @@ const customers=[
     },
 ]
 
-module.exports= customers
+export default customers

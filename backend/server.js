@@ -1,5 +1,8 @@
-const express= require('express')
-const customers = require('./data/customers')
+import express from 'express'
+import dotenv from 'dotenv'
+import customers  from './data/customers.js'
+
+dotenv.config()
 
 const app=express()
 
@@ -16,4 +19,6 @@ app.get('/api/customers/:id',(req,res)=>{
     res.json(customer)
 })
 
-app.listen(5000, console.log('Server running'))
+const PORT=process.env.PORT || 5000
+
+app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} on port ${PORT}`))
