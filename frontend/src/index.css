@@ -1,3 +1,10 @@
 main{
   min-height: 80vh;
 }
+
+.customer-holder{
+  /* other base styles go here */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
