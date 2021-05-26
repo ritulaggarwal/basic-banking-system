@@ -28,11 +28,11 @@ const AllCustomerScreen = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {customers.map((customer) => (
+                    {customers.map((customer,index) => (
                         
                         <tr key={customer._id}>
                             
-                            <td>{customer._id}</td>
+                            <td>{index+1}</td>
                             <td>{customer.name}</td>
                             <td>{customer.email}</td>
                             <td>{customer.balance}</td>
