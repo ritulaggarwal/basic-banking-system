@@ -1,36 +1,43 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Card, ListGroup, Button } from 'react-bootstrap'
-import axios from 'axios'
+import { listCustomerDetails } from '../actions/customerActions'
+import Loader from '../components/Loader'
+import Message from '../components/Message'
 
 const CustomerScreen = ({ match }) => {
-    const [customer, setCustomer] = useState([])
+    const dispatch = useDispatch()
+
+    const customerDetails = useSelector(state => state.customerDetails)
+    const { loading, error, customer } = customerDetails
 
     useEffect(() => {
-        const fetchCustomer = async () => {
-            const { data } = await axios.get(`/api/customers/${match.params.id}`)
-            setCustomer(data)
-        }
-        fetchCustomer()
-    }, [match])
-
+        dispatch(listCustomerDetails(match.params.id))
+    }, [dispatch,match])
+    
     return (
         <>
-            <div className="customer-holder">
-                <Card border="info" bg="light" style={{ width: '38rem' }} >
-                    <ListGroup variant="flush">
-                        <ListGroup.Item><h1>{customer.name}</h1></ListGroup.Item>
-                        <ListGroup.Item><h3>{customer.email}</h3></ListGroup.Item>
-                        <ListGroup.Item><h3>${customer.balance}</h3></ListGroup.Item>
-                    </ListGroup>
-                </Card>
-            </div>
-            <div className="customer-holder my-4">
-                <LinkContainer to='/transfer'>
-                    <Button variant="info">Transfer Money</Button>
-                </LinkContainer>
+            {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
+                <div>
+                    <div className="customer-holder">
+                        <Card border="info" bg="light" style={{ width: '38rem' }} >
+                            <ListGroup variant="flush">
+                                <ListGroup.Item><h1>{customer.name}</h1></ListGroup.Item>
+                                <ListGroup.Item><h3>{customer.email}</h3></ListGroup.Item>
+                                <ListGroup.Item><h3>${customer.balance}</h3></ListGroup.Item>
+                            </ListGroup>
+                        </Card>
+                    </div>
+                    <div className="customer-holder my-4">
+                        <LinkContainer to='/transfer'>
+                            <Button variant="info">Transfer Money</Button>
+                        </LinkContainer>
 
-            </div>
+                    </div>
+                </div>
+            )}
+
 
         </>
     )

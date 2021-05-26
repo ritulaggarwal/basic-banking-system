@@ -1,8 +1,12 @@
 import {createStore,combineReducers,applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
+import {customerListReducer, customerDetailsReducer} from './reducers/customerReducers'
 
-const reducer=combineReducers({})
+const reducer=combineReducers({
+    customerList: customerListReducer,
+    customerDetails: customerDetailsReducer,
+})
 
 const initialState={}
 
