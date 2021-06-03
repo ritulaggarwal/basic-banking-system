@@ -31,4 +31,42 @@ const updateCustomerProfile= asyncHandler ( async(req,res)=>{
 
 })
 
-export {updateCustomerProfile}
+
+// @desc    Create a customer
+// @route   POST /api/customers
+// @access  Public
+const createCustomer = asyncHandler(async (req, res) => {
+    const { name,email, balance } = req.body
+  
+    const customerExists = await Customer.findOne({ email })
+
+    if(customerExists){
+        res.status(400)
+        throw new Error('Customer Already Exists')
+    }
+
+    const customer= await Customer.create({
+        name,
+        email,
+        balance
+    })
+
+    if(customer){
+        res.status(201).json({
+            _id: customer._id,
+            name: customer.name,
+            email: customer.email,
+            balance: customer.balance,
+        })
+    }else{
+        res.status(404)
+        throw new Error('Customer not found')
+    }
+
+
+  })
+
+
+
+
+export {updateCustomerProfile, createCustomer}

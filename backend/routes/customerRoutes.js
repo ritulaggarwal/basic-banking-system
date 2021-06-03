@@ -1,7 +1,7 @@
 import express from 'express'
 import asyncHandler from 'express-async-handler'
 import Customer from '../models/customerModel.js'
-import {updateCustomerProfile} from '../controllers/customerController.js'
+import {createCustomer, updateCustomerProfile} from '../controllers/customerController.js'
 const router= express.Router()
 
 router.get('/',asyncHandler( async (req,res)=>{
@@ -9,6 +9,8 @@ router.get('/',asyncHandler( async (req,res)=>{
 
     res.json(customers)
 }))
+
+router.post('/',createCustomer)
 
 router.get('/:id',asyncHandler( async (req,res)=>{
     const customer=await Customer.findById(req.params.id)

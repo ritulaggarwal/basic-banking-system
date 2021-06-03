@@ -8,6 +8,7 @@ import AllCustomerScreen from './screens/AllCustomerScreen'
 import HomeScreen from './screens/HomeScreen'
 import CustomerScreen from './screens/CustomerScreen'
 import TransferScreen from './screens/TransferScreen'
+import CreateCustomerScreen from './screens/CreateCustomerScreen'
 
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
           <Route path='/customer' component={AllCustomerScreen} exact />
           <Route path='/customer/:id' component={CustomerScreen} />
           <Route path='/transfer' component={TransferScreen} exact />
+          <Route path='/create' component={CreateCustomerScreen} exact />
         </main>
 
       </Container>
