@@ -32,5 +32,13 @@ const addTransaction = asyncHandler(async (req, res) => {
 
 })
 
-export { addTransaction }
+// @desc    Get all transactions
+// @route   GET /api/transactions
+// @access  Public
+const getTransactions = asyncHandler(async (req, res) => {
+    const transactions = await Transaction.find({})
+    res.json(transactions)
+  })
+
+export { addTransaction, getTransactions }
 
