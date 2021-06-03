@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { listCustomers } from '../actions/customerActions'
+import { listCustomers, updateCustomerProfile } from '../actions/customerActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-import axios from 'axios'
+
 
 
 const TransferScreen = () => {
@@ -37,13 +37,30 @@ const TransferScreen = () => {
 
             return (alert('Please Enter Amount.'))
         }
+        let sid=null;
+        let smail=''
+        let rmail=''
+        let rid=null;
+        let rbal=0;
         for (const val of customers) {
             if (val.name === sender) {
                 senderBalance = val.balance;
+                sid=val._id;
+                smail=val.email
+            }
+            if(val.name===receiver){
+                rid=val._id;
+                rmail=val.email
+                rbal=val.balance
+
             }
         }
+        const ssid=sid
+        const rrid=rid
 
         console.log(senderBalance);
+        console.log(sid);
+        console.log(rid);
         if (senderBalance - bal < 0) {
             correct = false;
 
@@ -52,6 +69,30 @@ const TransferScreen = () => {
             setBal("");
             return (alert('Not enough balance'))
         }
+
+
+
+        if(correct===true){
+            var money=Number(bal)
+            senderBalance-=money;
+            rbal+=money
+            console.log(money)
+            console.log(senderBalance)
+            console.log(rbal)
+
+            dispatch(updateCustomerProfile({_id: ssid, name: sender, email: smail, balance: senderBalance }))
+
+            dispatch(updateCustomerProfile({_id: rrid,name:receiver,email:rmail,balance:rbal}))
+
+            alert("Successful Transaction");
+              
+            setSender("");
+            setReceiver("");
+            setBal("");
+        }
+
+
+
 /*
         if (correct === true) {
             

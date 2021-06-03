@@ -1,6 +1,7 @@
 import express from 'express'
 import asyncHandler from 'express-async-handler'
 import Customer from '../models/customerModel.js'
+import {updateCustomerProfile} from '../controllers/customerController.js'
 const router= express.Router()
 
 router.get('/',asyncHandler( async (req,res)=>{
@@ -20,6 +21,8 @@ router.get('/:id',asyncHandler( async (req,res)=>{
 
     
 }))
+
+router.put('/:id',updateCustomerProfile)
 
 
 export default router
