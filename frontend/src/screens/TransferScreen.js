@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { listCustomers, updateCustomerProfile } from '../actions/customerActions'
+import { createTransaction } from '../actions/transactionActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
+
 
 
 
@@ -73,7 +75,7 @@ const TransferScreen = () => {
 
 
         if(correct===true){
-            var money=Number(bal)
+            const money=Number(bal)
             senderBalance-=money;
             rbal+=money
             console.log(money)
@@ -83,6 +85,8 @@ const TransferScreen = () => {
             dispatch(updateCustomerProfile({_id: ssid, name: sender, email: smail, balance: senderBalance }))
 
             dispatch(updateCustomerProfile({_id: rrid,name:receiver,email:rmail,balance:rbal}))
+
+            dispatch(createTransaction({from: sender, fmail: smail, to: receiver, tmail: rmail, amount:money}))
 
             alert("Successful Transaction");
               
