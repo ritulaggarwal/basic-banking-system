@@ -3,14 +3,15 @@ import thunk from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import {customerListReducer, customerDetailsReducer,
      customerUpdateReducer,
-     customerCreateReducer} from './reducers/customerReducers'
+     customerCreateReducer,
+     customerDeleteReducer} from './reducers/customerReducers'
 
 const reducer=combineReducers({
     customerList: customerListReducer,
     customerDetails: customerDetailsReducer,
     customerUpdate: customerUpdateReducer,
     customerCreate: customerCreateReducer,
-    
+    customerDelete: customerDeleteReducer,
 })
 
 const initialState={}

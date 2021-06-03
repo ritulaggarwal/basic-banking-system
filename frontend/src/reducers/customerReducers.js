@@ -10,7 +10,10 @@ import {
     CUSTOMER_UPDATE_FAIL,
     CUSTOMER_CREATE_REQUEST,
     CUSTOMER_CREATE_SUCCESS,
-    CUSTOMER_CREATE_FAIL
+    CUSTOMER_CREATE_FAIL,
+    CUSTOMER_DELETE_REQUEST,
+    CUSTOMER_DELETE_SUCCESS,
+    CUSTOMER_DELETE_FAIL
 } from '../constants/customerConstants'
 
 export const customerListReducer = (state = { customers: [] }, action) => {
@@ -75,6 +78,23 @@ export const customerCreateReducer = (state = { }, action) => {
 
         case CUSTOMER_CREATE_FAIL:
             return { loading: false, error: action.payload }
+
+        default:
+            return state
+
+    }
+}
+
+export const customerDeleteReducer= (state= {},action)=>{
+    switch(action.type){
+        case CUSTOMER_DELETE_REQUEST:
+            return {loading: true}
+
+        case CUSTOMER_DELETE_SUCCESS:
+            return {loading: false, success: true}
+
+        case CUSTOMER_DELETE_FAIL:
+            return {loading: false, error: action.payload}
 
         default:
             return state

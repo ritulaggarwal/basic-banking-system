@@ -11,7 +11,10 @@ import {
   CUSTOMER_UPDATE_SUCCESS,
   CUSTOMER_CREATE_REQUEST,
   CUSTOMER_CREATE_FAIL,
-  CUSTOMER_CREATE_SUCCESS
+  CUSTOMER_CREATE_SUCCESS,
+  CUSTOMER_DELETE_REQUEST,
+  CUSTOMER_DELETE_SUCCESS,
+  CUSTOMER_DELETE_FAIL
 } from '../constants/customerConstants'
 
 export const listCustomers = () => async (dispatch) => {
@@ -114,4 +117,30 @@ export const create = (name, email, balance) => async (dispatch) => {
     })
   }
 }
+
+
+export const deleteCustomer = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: CUSTOMER_DELETE_REQUEST,
+    })
+
+
+    await axios.delete(`/api/customers/${id}`)
+
+    dispatch({ type: CUSTOMER_DELETE_SUCCESS })
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+
+    dispatch({
+      type: CUSTOMER_DELETE_FAIL,
+      payload: message,
+    })
+  }
+}
+
+
 
