@@ -5,7 +5,7 @@ import {customerListReducer, customerDetailsReducer,
      customerUpdateReducer,
      customerCreateReducer,
      customerDeleteReducer} from './reducers/customerReducers'
-import { transactionCreateReducer } from './reducers/transactionReducers'
+import { transactionCreateReducer, transactionListReducer } from './reducers/transactionReducers'
 
 const reducer=combineReducers({
     customerList: customerListReducer,
@@ -13,7 +13,8 @@ const reducer=combineReducers({
     customerUpdate: customerUpdateReducer,
     customerCreate: customerCreateReducer,
     customerDelete: customerDeleteReducer,
-    transactionCreate: transactionCreateReducer
+    transactionCreate: transactionCreateReducer,
+    transactionList: transactionListReducer,
 })
 
 const initialState={}

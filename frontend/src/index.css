@@ -11,8 +11,10 @@ main{
 
 .transfer{
 
-  height: 83vh;
-  background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+  height: 70vh;
+  
+    background: linear-gradient(to bottom, #66ffff 0%, #ffff00 100%);
+
   display: flex;
   flex-direction: column;
   justify-content: center;

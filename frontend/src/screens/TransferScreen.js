@@ -39,26 +39,26 @@ const TransferScreen = () => {
 
             return (alert('Please Enter Amount.'))
         }
-        let sid=null;
-        let smail=''
-        let rmail=''
-        let rid=null;
-        let rbal=0;
+        let sid = null;
+        let smail = ''
+        let rmail = ''
+        let rid = null;
+        let rbal = 0;
         for (const val of customers) {
             if (val.name === sender) {
                 senderBalance = val.balance;
-                sid=val._id;
-                smail=val.email
+                sid = val._id;
+                smail = val.email
             }
-            if(val.name===receiver){
-                rid=val._id;
-                rmail=val.email
-                rbal=val.balance
+            if (val.name === receiver) {
+                rid = val._id;
+                rmail = val.email
+                rbal = val.balance
 
             }
         }
-        const ssid=sid
-        const rrid=rid
+        const ssid = sid
+        const rrid = rid
 
         console.log(senderBalance);
         console.log(sid);
@@ -74,73 +74,28 @@ const TransferScreen = () => {
 
 
 
-        if(correct===true){
-            const money=Number(bal)
-            senderBalance-=money;
-            rbal+=money
+        if (correct === true) {
+            const money = Number(bal)
+            senderBalance -= money;
+            rbal += money
             console.log(money)
             console.log(senderBalance)
             console.log(rbal)
 
-            dispatch(updateCustomerProfile({_id: ssid, name: sender, email: smail, balance: senderBalance }))
+            dispatch(updateCustomerProfile({ _id: ssid, name: sender, email: smail, balance: senderBalance }))
 
-            dispatch(updateCustomerProfile({_id: rrid,name:receiver,email:rmail,balance:rbal}))
+            dispatch(updateCustomerProfile({ _id: rrid, name: receiver, email: rmail, balance: rbal }))
 
-            dispatch(createTransaction({from: sender, fmail: smail, to: receiver, tmail: rmail, amount:money}))
+            dispatch(createTransaction({ from: sender, fmail: smail, to: receiver, tmail: rmail, amount: money }))
 
             alert("Successful Transaction");
-              
+
             setSender("");
             setReceiver("");
             setBal("");
         }
 
-
-
-/*
-        if (correct === true) {
-            
-            axios.post("/api/customers", {
-                sender: sender,
-                receiver: receiver,
-                balance: bal
-            }).then(() => {
-                console.log("Success");
-            });
-
-            axios.put(`/api/customers/`, {
-                balance: bal,
-                receiver: receiver
-            }).then((response) => { 
-                    customers.map((val) => {
-                        return val.Name === receiver ?
-                            {
-                                _id: val._id,
-                                name: val.name,
-                                email: val.email,
-                                balance: parseInt(bal) + parseInt(val.balance),
-                            }
-                            : val.Name === sender ?
-                                {
-                                    _id: val._id,
-                                    name: val.name,
-                                    email: val.email,
-                                    balance: parseInt(val.balance) - parseInt(bal),
-                                }
-                                : val;
-                    })
-                
-
-                alert("Successful Transaction");
-              
-                setSender("");
-                setReceiver("");
-                setBal("");
-            });
-        }*/
     };
-
-
 
 
     useEffect(() => {
