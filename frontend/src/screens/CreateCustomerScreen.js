@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Form, Button, Row, Col } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -16,6 +15,7 @@ const CreateCustomerScreen = ({history}) => {
 
     const customerCreate = useSelector((state) => state.customerCreate)
     const { loading, error,success, customerInfo } = customerCreate
+    console.log(customerInfo)
    
 
     // useEffect(() => {
@@ -35,7 +35,7 @@ const CreateCustomerScreen = ({history}) => {
 
     return (
         <FormContainer>
-        <h1>Create New User</h1>
+        <h1>Create New Customer</h1>
         {error && <Message variant='danger'>{error}</Message>}
         {loading && <Loader />}
         {success && <Message variant='success'>Customer Created</Message>}
@@ -74,7 +74,7 @@ const CreateCustomerScreen = ({history}) => {
 
   
           <Button type='submit' variant='primary'>
-            Register
+            Create
           </Button>
         </Form>
   

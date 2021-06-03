@@ -13,7 +13,7 @@ main{
 
   height: 70vh;
   
-    background: linear-gradient(to bottom, #66ffff 0%, #ffff00 100%);
+  background: linear-gradient(to bottom, #666699 0%, #999966 100%);
 
   display: flex;
   flex-direction: column;
@@ -29,6 +29,7 @@ main{
   width: 40%;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
+  color: white;
 }
 .transfer-card:hover{
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
@@ -70,4 +71,32 @@ main{
 
 .landing-page{
   background-color: lightgrey;
+}
+
+
+
+.card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  background: linear-gradient(to bottom, #666699 0%, #999966 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 63vh;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.containe {
+  
+  width:50%;
+  height: 50%;
+  font-size: 20px;
+  padding-left: 10px;
 }

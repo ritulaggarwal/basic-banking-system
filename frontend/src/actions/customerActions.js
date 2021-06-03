@@ -68,7 +68,7 @@ export const updateCustomerProfile = (customer) => async (dispatch) => {
 
 
     const { data } = await axios.put(`/api/customers/${customer._id}`, customer)
-
+    console.log(data)
     dispatch({
       type: CUSTOMER_UPDATE_SUCCESS,
     })

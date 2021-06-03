@@ -1,4 +1,4 @@
-import {TRANSACTION_CREATE_FAIL, TRANSACTION_CREATE_REQUEST, ORDER_CREATE_RESET,
+import {TRANSACTION_CREATE_FAIL, TRANSACTION_CREATE_REQUEST, 
     TRANSACTION_CREATE_SUCCESS,
     TRANSACTION_LIST_REQUEST,
     TRANSACTION_LIST_SUCCESS,
@@ -21,8 +21,7 @@ export const transactionCreateReducer = (state = {}, action) => {
                 loading: false,
                 error: action.payload,
             }
-        case ORDER_CREATE_RESET:
-            return {}
+      
         default:
             return state
     }
