@@ -4,26 +4,26 @@ import Customer from '../models/customerModel.js'
 // @desc    Update customer profile
 // @route   PUT /api/customers/:id
 // @access  Public
-const updateCustomerProfile= asyncHandler ( async(req,res)=>{
-    const customer= await Customer.findById(req.params.id)
+const updateCustomerProfile = asyncHandler(async (req, res) => {
+    const customer = await Customer.findById(req.params.id)
 
-    if(customer){
+    if (customer) {
         customer.name = req.body.name || customer.name
         customer.email = req.body.email || customer.email
-        customer.balance=req.body.balance || customer.balance
+        customer.balance = req.body.balance || customer.balance
 
         console.log(req.body)
 
-        const updatedCustomer= await customer.save()
+        const updatedCustomer = await customer.save()
         res.json({
             //updatedCustomer
             _id: updatedCustomer._id,
             name: updatedCustomer.name,
             email: updatedCustomer.email,
-            balance: updatedCustomer.balance,      
-          })
+            balance: updatedCustomer.balance,
+        })
 
-    }else{
+    } else {
         res.status(404)
         throw new Error('User not found')
     }
@@ -36,37 +36,53 @@ const updateCustomerProfile= asyncHandler ( async(req,res)=>{
 // @route   POST /api/customers
 // @access  Public
 const createCustomer = asyncHandler(async (req, res) => {
-    const { name,email, balance } = req.body
-  
+    const { name, email, balance } = req.body
+
     const customerExists = await Customer.findOne({ email })
 
-    if(customerExists){
+    if (customerExists) {
         res.status(400)
         throw new Error('Customer Already Exists')
     }
 
-    const customer= await Customer.create({
+    const customer = await Customer.create({
         name,
         email,
         balance
     })
 
-    if(customer){
+    if (customer) {
         res.status(201).json({
             _id: customer._id,
             name: customer.name,
             email: customer.email,
             balance: customer.balance,
         })
-    }else{
+    } else {
         res.status(404)
         throw new Error('Customer not found')
     }
 
 
-  })
+})
+
+
+// @desc    Delete user
+// @route   DELETE /api/customers/:id
+// @access  Public
+const deleteCustomer = asyncHandler(async (req, res) => {
+    const customer = await Customer.findById(req.params.id)
+
+    if (customer) {
+        await customer.remove()
+        res.json({ message: 'Customer removed' })
+    } else {
+        res.status(404)
+        throw new Error('Customer not found')
+    }
+})
 
 
 
 
-export {updateCustomerProfile, createCustomer}
+export { updateCustomerProfile, createCustomer, deleteCustomer }
